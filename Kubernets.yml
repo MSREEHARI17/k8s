@@ -13,7 +13,7 @@ spec:
         app: springapp
     spec:
       containers:
-      - image: cloudzenix/docker-private-repo
+      - image: cloudzenix/springboot-mongo
         name: springpod
         ports:
         - containerPort: 8080
