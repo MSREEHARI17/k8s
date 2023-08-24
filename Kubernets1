@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  namespace: spring-boot-app
+  name: springboot
+spec:
+  replicas: 1
+  selector:
+    app: springapp
+  template:
+    metadata:
+      labels:
+        app: springapp
+    spec:
+      containers:
+      - image: cloudzenix/docker-private-repo
+        name: springpod
+        ports:
+        - containerPort: 8080
+---
+# Node Port Service
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: spring-boot-app
+  name: springappsvc
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: springapp
